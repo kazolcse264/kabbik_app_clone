@@ -1,0 +1,9 @@
+export 'package:kabbik_ui_clone/src/features/core/screens/audio_book_details_page/widgets/author_section.dart';
+export 'package:kabbik_ui_clone/src/features/core/screens/audio_book_details_page/widgets/decription_section.dart';
+export 'package:kabbik_ui_clone/src/features/core/screens/audio_book_details_page/widgets/details_page_app_bar.dart';
+export 'package:kabbik_ui_clone/src/features/core/screens/audio_book_details_page/widgets/favourite_and_play_button.dart';
+export 'package:kabbik_ui_clone/src/features/core/screens/audio_book_details_page/widgets/listening_section.dart';
+export 'package:kabbik_ui_clone/src/features/core/screens/audio_book_details_page/widgets/rating_section.dart';
+export 'package:kabbik_ui_clone/src/features/core/screens/audio_book_details_page/widgets/tab_bar_section/tab_bar_content_view_section.dart';
+export 'package:kabbik_ui_clone/src/features/core/screens/audio_book_details_page/widgets/tab_bar_section/tabs_section.dart';
+export '../audio_playing_screen/imports.dart';
