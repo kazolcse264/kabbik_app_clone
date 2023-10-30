@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "903685931258",
+    "project_id": "kabbik-clone",
+    "storage_bucket": "kabbik-clone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903685931258:android:37bc60d7c31abe1b598943",
+        "android_client_info": {
+          "package_name": "com.example.kabbik_ui_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903685931258-p2i2d3nfgjivivhd18nmc0a1m4qep0al.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAst5_0tUlOkiPmqh5LWZEkMD6iwoK-dfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903685931258-p2i2d3nfgjivivhd18nmc0a1m4qep0al.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "903685931258-csd57ku5b2913eg5u0fgl7qdhuj0otf2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kabbikUiClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>903685931258-csd57ku5b2913eg5u0fgl7qdhuj0otf2.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.903685931258-csd57ku5b2913eg5u0fgl7qdhuj0otf2</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD4AQ-_qo2ymPmaLOBl4aT3gbpSijCMBr4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>903685931258</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.kabbikUiClone</string>
+	<key>PROJECT_ID</key>
+	<string>kabbik-clone</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kabbik-clone.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:903685931258:ios:01faef354aaec890598943</string>
+</dict>
+</plist>
