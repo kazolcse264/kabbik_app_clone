@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kabbik_ui_clone/src/features/core/screens/audio_playing_screen/playing_screen.dart';
 import '../../../../common_widgets/dismissible_bottom_container.dart';
+import '../../../auth/controllers/user_provider.dart';
 import '../../controllers/audio_book_controller_firebase.dart';
 import '../audio_book_details_page/imports.dart';
+import '../user_profile_screen/user_profile_screen.dart';
 import 'home_page.dart';
 
 //@RoutePage()
@@ -37,12 +39,7 @@ class _PreservingBottomNavBarState extends State<PreservingBottomNavBar> {
         size: 150,
       ),
     ),
-    const Center(
-      child: Icon(
-        Icons.person,
-        size: 150,
-      ),
-    ),
+    const UserProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -69,6 +66,7 @@ class _PreservingBottomNavBarState extends State<PreservingBottomNavBar> {
       });
     });
     super.initState();
+    Provider.of<UserProvider>(context, listen: false).getUserInfo();
   }
 
   @override
@@ -117,7 +115,7 @@ class _PreservingBottomNavBarState extends State<PreservingBottomNavBar> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'profile',
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,

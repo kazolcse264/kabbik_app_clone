@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "903685931258-p2i2d3nfgjivivhd18nmc0a1m4qep0al.apps.googleusercontent.com",
+          "client_id": "903685931258-gkvadnbcvv36iqaidn78tupm6m4kq9lr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kabbik_ui_clone",
+            "certificate_hash": "e6866828c502bc343071bd38f501dbb16f7d708d"
+          }
+        },
+        {
+          "client_id": "903685931258-03vrdvc4ep3jcfm6ps10fkjh905r05na.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,14 +35,14 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "903685931258-p2i2d3nfgjivivhd18nmc0a1m4qep0al.apps.googleusercontent.com",
+              "client_id": "903685931258-03vrdvc4ep3jcfm6ps10fkjh905r05na.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "903685931258-csd57ku5b2913eg5u0fgl7qdhuj0otf2.apps.googleusercontent.com",
+              "client_id": "903685931258-9rjrkemva41fifkra3flujqs1ctlm586.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.kabbikUiClone"
+                "bundle_id": "com.example.kabbikUiClone.RunnerTests"
               }
             }
           ]

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kabbik_ui_clone/src/features/auth/screens/auth/auth_checking_page.dart';
 import 'package:kabbik_ui_clone/src/features/auth/screens/reset_password/reset_password_page.dart';
@@ -10,7 +9,10 @@ import 'package:kabbik_ui_clone/src/features/core/screens/audio_book_details_pag
 import 'package:kabbik_ui_clone/src/features/core/screens/audio_playing_screen/playing_screen.dart';
 import 'package:kabbik_ui_clone/src/features/core/screens/dashboard/home_page.dart';
 import 'package:kabbik_ui_clone/src/features/core/screens/dashboard/preserving_bottom_nav_bar.dart';
-class AppRouter{
+import 'package:kabbik_ui_clone/src/features/core/screens/user_profile_screen/otp_verification_page.dart';
+import 'package:kabbik_ui_clone/src/features/core/screens/user_profile_screen/user_profile_screen.dart';
+
+class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case AuthCheckingPage.routeName:
@@ -46,8 +48,7 @@ class AppRouter{
       case HomePage.routeName:
         return MaterialPageRoute(
           settings: routeSettings,
-          builder: (_) => const HomePage(
-          ),
+          builder: (_) => const HomePage(),
         );
       case PlayingScreen.routeName:
         var audioBook = routeSettings.arguments as AudioBookF;
@@ -70,20 +71,37 @@ class AppRouter{
         return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => SignUpPage(
-             onClickedSignIn: function,
+            onClickedSignIn: function,
           ),
+        );
+
+      case OtpVerificationPage.routeName:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => const OtpVerificationPage(),
+        );
+
+      case UserProfileScreen.routeName:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => const UserProfileScreen(),
         );
       default:
         return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => const Scaffold(
+            backgroundColor: Colors.red,
             body: Center(
-              child: Text('Screen does not exist!'),
+              child: Text(
+                'Screen does not exist!',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
             ),
           ),
         );
     }
   }
 }
-
-

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kabbik_ui_clone/router.dart';
+import 'package:kabbik_ui_clone/src/features/auth/controllers/user_provider.dart';
 import 'package:kabbik_ui_clone/src/features/auth/screens/auth/auth_checking_page.dart';
 import 'package:kabbik_ui_clone/src/features/core/controllers/audio_book_controller.dart';
 import 'package:kabbik_ui_clone/src/features/core/controllers/audio_book_controller_firebase.dart';
@@ -14,7 +15,15 @@ import 'package:kabbik_ui_clone/src/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
-
+///For Firebase Push Notification
+/*Future<void> backgroundHandler(RemoteMessage message) async {
+  if (kDebugMode) {
+    print(message.data.toString());
+  }
+  if (kDebugMode) {
+    print(message.notification!.title);
+  }
+}*/
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -24,11 +33,10 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  notificationInitialized();
+  LocalNotificationService.notificationInitialized();
+///For Firebase Push Notification
+ // FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   await setupServiceLocator();
-
-
-
   runApp(
     MultiProvider(
       providers: [
@@ -37,6 +45,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => AudioBooksProviderFirebase(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
         ),
       ],
       child: const MyApp(),

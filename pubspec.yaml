@@ -56,9 +56,12 @@ dependencies:
   flutter_local_notifications:
   path_provider:
   firebase_core:
+  firebase_messaging:
   firebase_auth:
   cloud_firestore:
   firebase_storage:
+  google_sign_in:
+  pin_code_fields:
   image_picker:
   cached_network_image:
   flutter_easyloading:

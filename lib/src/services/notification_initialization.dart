@@ -1,27 +1,74 @@
- import 'package:flutter_local_notifications/flutter_local_notifications.dart';
- notificationInitialized() async {
-   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-   FlutterLocalNotificationsPlugin();
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+class LocalNotificationService{
+  static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
+  static void notificationInitialized() async {
+    const AndroidInitializationSettings initializationSettingsAndroid =
+    AndroidInitializationSettings('@mipmap/ic_launcher');
+    DarwinInitializationSettings initializationSettingsDarwin =
+    const DarwinInitializationSettings(
+      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+    );
+    const LinuxInitializationSettings initializationSettingsLinux =
+    LinuxInitializationSettings(defaultActionName: 'Open notification');
+    InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin,
+      macOS: initializationSettingsDarwin,
+      linux: initializationSettingsLinux,
+    );
 
-   const AndroidInitializationSettings initializationSettingsAndroid =
-   AndroidInitializationSettings('@mipmap/ic_launcher');
-   DarwinInitializationSettings initializationSettingsDarwin =
-   const DarwinInitializationSettings(
-     onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-   );
-   const LinuxInitializationSettings initializationSettingsLinux =
-   LinuxInitializationSettings(defaultActionName: 'Open notification');
-   InitializationSettings initializationSettings = InitializationSettings(
-     android: initializationSettingsAndroid,
-     iOS: initializationSettingsDarwin,
-     macOS: initializationSettingsDarwin,
-     linux: initializationSettingsLinux,
-   );
+    await flutterLocalNotificationsPlugin.initialize(
 
-   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
- }
+      initializationSettings,
+      onDidReceiveNotificationResponse: (id) async {
+        print("onSelectNotification");
+        print("Router Value1234 $id");
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => DemoScreen(
+        //       id: id,
+        //     ),
+        //   ),
+        // );
+      },
+    );
 
- void onDidReceiveLocalNotification(
-     int id, String? title, String? body, String? payload) {
-   // Handle the received local notification
- }
+
+  }
+
+  static void createAndDisplayNotification(RemoteMessage message) async {
+    try {
+      final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+      const NotificationDetails notificationDetails = NotificationDetails(
+        android: AndroidNotificationDetails(
+          "pushnotificationapp",
+          "pushnotificationappchannel",
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      );
+
+      await flutterLocalNotificationsPlugin.show(
+        id,
+        message.notification!.title,
+        message.notification!.body,
+        notificationDetails,
+        payload: message.data['_id'],
+      );
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
+
+}
+
+
+void onDidReceiveLocalNotification(
+    int id, String? title, String? body, String? payload) {
+  // Handle the received local notification
+}

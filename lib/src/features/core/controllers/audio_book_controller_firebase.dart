@@ -1,19 +1,18 @@
 import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../constants/text_strings.dart';
+
+import '../../../db/db_helper.dart';
 import '../models/audio_book.dart';
 
 import '../models/image_model.dart';
 
+
 class AudioBooksProviderFirebase with ChangeNotifier {
   List<AudioBookF> _audioBooksF = [];
   List<AudioBookF> _audioBooksCarousel = [];
-  final _db = FirebaseFirestore.instance;
-
   List<AudioBookF> get audioBooksF => _audioBooksF;
   List<AudioBookF> get audioBooksCarousel => _audioBooksCarousel;
 
@@ -21,11 +20,8 @@ class AudioBooksProviderFirebase with ChangeNotifier {
 
   // Fetch audio books from Firestore
   Future<void> fetchAudioBooks() async {
-    try {
-      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection(collectionAudioBooks)
-          .get();
-
+    try{
+      final querySnapshot =  await DbHelper.fetchAudioBooks();
       _audioBooksF = querySnapshot.docs.map((doc) {
         final data = doc.data() as Map<String, dynamic>;
         return AudioBookF.fromMap({
@@ -39,12 +35,15 @@ class AudioBooksProviderFirebase with ChangeNotifier {
         });
       }).toList();
       notifyListeners();
-    } catch (error) {
+    }
+    catch (error) {
       if (kDebugMode) {
         print('Error fetching audio books: $error');
       }
     }
   }
+
+
   AudioBookF getAudioBookByArtUri(Uri uri) {
     return _audioBooksF.firstWhere((audioBook) => audioBook.thumbnailImageModel.audioBookImageDownloadUrl == uri.toString());
   }
@@ -90,48 +89,16 @@ class AudioBooksProviderFirebase with ChangeNotifier {
     return downloadUrl;
   }
 
-  Future<void> addNewAudioBook(AudioBookF audioBookModel) {
-    final wb = _db.batch(); //write batch
-    final audioBookDoc = _db.collection(collectionAudioBooks).doc();
-    audioBookModel.id = audioBookDoc.id;
-    audioBookModel.thumbnailImageModel.audioBookCoverPageId = audioBookDoc.id;
-    wb.set(audioBookDoc, audioBookModel.toMap());
-    return wb.commit();
+  Future<void> addNewAudioBook(AudioBookF audioBookModel) async {
+    return await DbHelper.addNewAudioBook(audioBookModel);
   }
 
   Future<List<String>> getAllAudioBookImageUrlsByIsCarousel() async {
-    try {
-      final snapshot = await _db
-          .collection(collectionAudioBooks)
-          .where(
-              '$audioBookFieldThumbnailImageModel.$imageFieldAudioBookIsCarousel',
-              isEqualTo: 'true')
-          .get();
-
-      final imageUrls = snapshot.docs.map((doc) {
-        final data = doc.data();
-        final thumbnailImageModel = data[audioBookFieldThumbnailImageModel];
-        final audioBookImageDownloadUrl =
-            thumbnailImageModel[imageFieldAudioBookImageDownloadUrl] as String;
-        return audioBookImageDownloadUrl;
-      }).toList();
-      return imageUrls;
-    } catch (error) {
-      if (kDebugMode) {
-        print('Error fetching audio book image URLs by carousel: $error');
-      }
-      return []; // Return an empty list in case of an error
-    }
+   return await DbHelper.getAllAudioBookImageUrlsByIsCarousel();
   }
   Future<void> getAllAudioBookCarousel() async {
     try {
-      final snapshot = await _db
-          .collection(collectionAudioBooks)
-          .where(
-              '$audioBookFieldThumbnailImageModel.$imageFieldAudioBookIsCarousel',
-              isEqualTo: 'true')
-          .get();
-
+      final snapshot = await DbHelper.getAllAudioBookCarousel();
       _audioBooksCarousel = snapshot.docs.map((doc) {
         final data = doc.data();
         return AudioBookF.fromMap({
@@ -151,6 +118,5 @@ class AudioBooksProviderFirebase with ChangeNotifier {
       }
     }
   }
-
 
 }

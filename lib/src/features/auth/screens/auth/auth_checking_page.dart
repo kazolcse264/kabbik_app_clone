@@ -4,9 +4,9 @@ import 'package:kabbik_ui_clone/src/features/auth/screens/auth/auth_page.dart';
 import 'package:kabbik_ui_clone/src/features/auth/screens/verify_email/verify_email_page.dart';
 import 'package:kabbik_ui_clone/src/features/core/screens/audio_playing_screen/imports.dart';
 
-//@RoutePage()
 class AuthCheckingPage extends StatelessWidget {
-  static const String routeName = '/auth_checking';
+  static const String routeName = '/';
+
   const AuthCheckingPage({super.key});
 
   @override
